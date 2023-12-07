@@ -3,6 +3,7 @@ import { BillBoardClient } from "./components/client";
 import prismadb from "@/lib/prismadb";
 import { BillBoardColumn } from "./components/column";
 import { format } from "date-fns";
+import { formmater } from "@/lib/utils";
 
 const Products = async ({ params }: { params: { storeId: string } }) => {
   const products = await prismadb.product.findMany({
@@ -24,7 +25,10 @@ const Products = async ({ params }: { params: { storeId: string } }) => {
     name: item.name,
     isFeatured: item.isFeatured,
     isArchive: item.isArchive,
-    
+    price: formmater.format(item.price.toNumber()),
+    category: item.category.name,
+    size: item.size.name,
+    color: item.color.name,
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
 

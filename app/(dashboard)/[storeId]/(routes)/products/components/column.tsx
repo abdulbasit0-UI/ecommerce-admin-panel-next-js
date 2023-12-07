@@ -5,16 +5,30 @@ import { CellAction } from "./cell-action";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type BillBoardColumn = {
+export type ProductColumn = {
   id: string;
-  label: string;
+  name: string;
+  category: string;
+  isFeatured: boolean;
+  isArchive: boolean;
+  price: string;
+  size: string;
+  color: string;
   createdAt: string;
 };
 
-export const columns: ColumnDef<BillBoardColumn>[] = [
+export const columns: ColumnDef<ProductColumn>[] = [
   {
-    accessorKey: "label",
-    header: "Label",
+    accessorKey: "name",
+    header: "Name",
+  },
+  {
+    accessorKey: "isArchived",
+    header: "Archived",
+  },
+  {
+    accessorKey: "is",
+    header: "Name",
   },
   {
     accessorKey: "createdAt",
