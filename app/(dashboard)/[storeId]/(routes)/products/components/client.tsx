@@ -2,19 +2,18 @@
 
 import Heading from "@/components/ui/Heading";
 import { Button } from "@/components/ui/button";
-import { Billboard } from "@prisma/client";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { BillBoardColumn, columns } from "./column";
+import { ProductColumn, columns } from "./column";
 import { DataTable } from "@/components/ui/data-table";
 import { ApiList } from "@/components/ui/api-list";
 import { Separator } from "@/components/ui/separator";
 
-interface BillBoardClientProps {
-  data: BillBoardColumn[];
+interface ProductClientProps {
+  data: ProductColumn[];
 }
 
-export const BillBoardClient: React.FC<BillBoardClientProps> = ({ data }) => {
+export const ProductClient: React.FC<ProductClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
   return (
@@ -22,7 +21,7 @@ export const BillBoardClient: React.FC<BillBoardClientProps> = ({ data }) => {
       <div className="flex items-center justify-between">
         <Heading
           title={`Billboards (${data.length})`}
-          description="Manage Bill Boards"
+          description="Manage Products"
         />
         <Button
           onClick={() => router.push(`/${params.storeId}/billboards/new`)}
