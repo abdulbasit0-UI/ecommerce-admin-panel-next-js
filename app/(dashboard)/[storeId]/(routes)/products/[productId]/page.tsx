@@ -1,6 +1,6 @@
 import prismadb from "@/lib/prismadb";
 import React from "react";
-import BillBoardForm from "./components/billboardForm";
+import BillBoardForm from "./components/productForm";
 
 const BillBoardPage = async ({
   params,
