@@ -22,6 +22,7 @@ model Store {
   sizes      Size[]      @relation("StoreToSize")
   colors     Color[]     @relation("StoreToColor")
   products   Product[]   @relation("StoreToProduct")
+  orders     Order[]     @relation("StoreToOrder")
 }
 
 model Billboard {
@@ -96,7 +97,8 @@ model Product {
   images     Image[]
   createdAt  DateTime @default(now())
 
-  updatedAt DateTime @updatedAt
+  updatedAt  DateTime    @updatedAt
+  orderItems OrderItem[]
 
   @@index([sizeId])
   @@index([colorId])
@@ -114,4 +116,29 @@ model Image {
   updatedAt DateTime @updatedAt
 
   @@index([productId])
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  storeId    String
+  store      Store       @relation("StoreToOrder", fields: [storeId], references: [id])
+  orderItems OrderItem[]
+  isPaid     Boolean     @default(false)
+  phone      String      @default("")
+  address    String      @default("")
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@index([storeId])
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  Order     Order?  @relation(fields: [orderId], references: [id])
+  orderId   String
+  ProductId String
+  product   Product @relation(fields: [ProductId], references: [id])
+
+  @@index([ProductId])
+  @@index([orderId])
 }

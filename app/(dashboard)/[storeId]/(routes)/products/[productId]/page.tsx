@@ -1,25 +1,52 @@
 import prismadb from "@/lib/prismadb";
 import React from "react";
 import BillBoardForm from "./components/productForm";
+import { createBrotliCompress } from "zlib";
 
-const BillBoardPage = async ({
+const ProductPage = async ({
   params,
 }: {
-  params: { billboardId: string };
+  params: { productId: string; storeId: string };
 }) => {
-  const billboard = await prismadb.billboard.findUnique({
+  const product = await prismadb.product.findUnique({
     where: {
-      id: params.billboardId,
+      id: params.productId,
+    },
+    include: {
+      images: true,
+    },
+  });
+
+  const categories = await prismadb.category.findMany({
+    where: {
+      storeId: params.storeId,
+    },
+  });
+
+  const size = await prismadb.size.findMany({
+    where: {
+      storeId: params.storeId,
+    },
+  });
+
+  const color = await prismadb.color.findMany({
+    where: {
+      storeId: params.storeId,
     },
   });
 
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <BillBoardForm initialData={billboard} />
+        <BillBoardForm
+          initialData={product}
+          size={size}
+          color={color}
+          categories={categories}
+        />
       </div>
     </div>
   );
 };
 
-export default BillBoardPage;
+export default ProductPage;
