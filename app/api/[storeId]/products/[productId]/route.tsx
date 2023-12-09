@@ -58,7 +58,7 @@ export async function PATCH(
       return new NextResponse("Unauthenticated", { status: 401 });
     }
 
-    if (!images || images.length) {
+    if (!images || !images.length) {
       return new NextResponse("Images are required", { status: 400 });
     }
 
