@@ -54,7 +54,7 @@ const formSchema = z.object({
   sizeId: z.string().min(1),
   colorId: z.string().min(1),
   isFeatured: z.boolean().default(false).optional(),
-  isArchived: z.boolean().default(false).optional(),
+  isArchive: z.boolean().default(false).optional(),
 });
 
 type ProductFormValues = z.infer<typeof formSchema>;
@@ -93,7 +93,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
           sizeId: "",
           colorId: "",
           isFeatured: false,
-          isArchived: false,
+          isArchive: false,
         },
   });
 
@@ -360,7 +360,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="isArchived"
+              name="isArchive"
               render={({ field }) => {
                 return (
                   <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
