@@ -51,7 +51,7 @@ export async function PATCH(
       sizeId,
       categoryId,
       isFeatured,
-      isArchived,
+      isArchive,
     } = body;
 
     if (!userId) {
@@ -110,7 +110,7 @@ export async function PATCH(
         images: {
           deleteMany: {},
         },
-        isArchive: isArchived,
+        isArchive: isArchive,
         isFeatured: isFeatured,
       },
     });

@@ -18,7 +18,7 @@ export async function POST(
       sizeId,
       categoryId,
       isFeatured,
-      isArchived,
+      isArchive,
     } = body;
 
     if (!userId) {
@@ -72,7 +72,7 @@ export async function POST(
         colorId,
         categoryId,
         isFeatured,
-        isArchive: isArchived,
+        isArchive: isArchive,
         images: {
           createMany: {
             data: [...images.map((image: { url: string }) => image)],
