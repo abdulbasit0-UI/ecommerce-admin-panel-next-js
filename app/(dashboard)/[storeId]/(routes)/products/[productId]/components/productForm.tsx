@@ -34,6 +34,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
 
 interface ProductFormProps {
   categories: Category[];
@@ -48,6 +49,7 @@ interface ProductFormProps {
 
 const formSchema = z.object({
   name: z.string().min(1),
+  description: z.string().min(1),
   images: z.object({ url: z.string() }).array(),
   price: z.coerce.number().min(1),
   categoryId: z.string().min(1),
@@ -92,6 +94,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
           categoryId: "",
           sizeId: "",
           colorId: "",
+          description: "",
           isFeatured: false,
           isArchive: false,
         },
@@ -376,6 +379,19 @@ const ProductForm: React.FC<ProductFormProps> = ({
                         This product will not apear in the store
                       </FormDescription>
                     </div>
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => {
+                return (
+                  <FormItem className="">
+                    <FormControl></FormControl>
+                    <FormLabel>Description</FormLabel>
+                    <Textarea {...field} placeholder="Product Description" />
                   </FormItem>
                 );
               }}

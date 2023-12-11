@@ -30,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ImageUpload from "@/components/ui/image-upload";
 
 interface CategoryFormProps {
   initialData: Category | null;
@@ -38,6 +39,7 @@ interface CategoryFormProps {
 
 const formSchema = z.object({
   name: z.string().min(1),
+  imageUrl: z.string().min(1),
   billboardId: z.string().min(1),
 });
 
@@ -66,6 +68,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
       name: "",
+      imageUrl: "",
       billboardId: "",
     },
   });
@@ -136,6 +139,26 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
           className="space-y-8 w-full"
         >
           <div className="grid grid-cols-3 gap-8">
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Background Image</FormLabel>
+                    <FormControl>
+                      <ImageUpload
+                        disabled={loading}
+                        onChange={(url) => field.onChange(url)}
+                        onRemove={() => field.onChange("")}
+                        value={field.value ? [field.value] : []}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
             <FormField
               control={form.control}
               name="name"
